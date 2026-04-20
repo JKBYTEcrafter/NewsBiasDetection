@@ -12,7 +12,7 @@ except ImportError:
     from utils import clean_text
 
 # Initialize App
-app = FastAPI(title="Hindi News Bias Detector", version="1.0")
+app = FastAPI(title="NewsBiasDetector", version="1.0")
 
 # Request Schema
 class TextRequest(BaseModel):
