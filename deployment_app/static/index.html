@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindi News Bias Detector | AI Research Platform</title>
+    <meta name="description" content="Advanced Hindi news authenticity detection using 14 ML models including Transformers, LSTM, CNN, and classic ML classifiers. Detect Legitimate vs Synthetic news.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-grid"></div>
+<div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <div class="nav-brand">
+            <div class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>NewsBias<span class="brand-accent">AI</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#classifier" class="nav-link">Classifier</a>
+            <a href="#models" class="nav-link">Models</a>
+            <a href="#comparison" class="nav-link">Comparison</a>
+            <a href="#architecture" class="nav-link">Architecture</a>
+        </div>
+        <div class="nav-badge">
+            <span class="status-dot"></span>
+            <span>Live Model</span>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-pill">
+            <span class="pill-dot"></span>
+            Research Paper · Hindi NLP · 14 Models Compared
+        </div>
+        <h1 class="hero-title">
+            Hindi News<br>
+            <span class="gradient-text">Bias Detection</span><br>
+            at Scale
+        </h1>
+        <p class="hero-desc">
+            A comprehensive ML research platform that evaluates <strong>14 distinct classifiers</strong> — from classic TF-IDF baselines to 
+            transformer-based architectures — on Hindi news authenticity detection (Legitimate vs Synthetic).
+        </p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-num">14</div>
+                <div class="stat-label">ML Models</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num">3</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num">~93%</div>
+                <div class="stat-label">Best Accuracy</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num">Hindi</div>
+                <div class="stat-label">Language</div>
+            </div>
+        </div>
+        <div class="hero-cta">
+            <a href="#classifier" class="btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Try Classifier
+            </a>
+            <a href="#models" class="btn-secondary">
+                Explore Models
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="model-globe">
+            <div class="globe-ring ring-1"></div>
+            <div class="globe-ring ring-2"></div>
+            <div class="globe-ring ring-3"></div>
+            <div class="globe-core">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                </svg>
+            </div>
+            <div class="globe-node node-1">LR</div>
+            <div class="globe-node node-2">LSTM</div>
+            <div class="globe-node node-3">CNN</div>
+            <div class="globe-node node-4">XLM-R</div>
+            <div class="globe-node node-5">MuRIL</div>
+            <div class="globe-node node-6">XGB</div>
+        </div>
+    </div>
+</section>
+
+<!-- Live Classifier Section -->
+<section id="classifier" class="section">
+    <div class="section-container">
+        <div class="section-header">
+            <div class="section-tag">Live Demo</div>
+            <h2 class="section-title">Real-Time Classifier</h2>
+            <p class="section-desc">Paste any Hindi news headline or article and get instant authenticity prediction from our production model — <strong>Sentence Transformer + Logistic Regression</strong> pipeline.</p>
+        </div>
+
+        <div class="classifier-card">
+            <div class="classifier-top">
+                <div class="model-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    Model: paraphrase-multilingual-MiniLM-L12-v2 + LogisticRegressionCV
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <label for="text-input" class="input-label">Hindi News Text</label>
+                <textarea 
+                    id="text-input" 
+                    placeholder="यहाँ हिंदी समाचार टेक्स्ट पेस्ट करें... (Paste Hindi news text for analysis)"
+                    rows="6"
+                ></textarea>
+                <div class="textarea-footer">
+                    <span class="char-count" id="char-count">0 characters</span>
+                    <div class="sample-btns">
+                        <button class="sample-btn" onclick="loadSample(1)">Sample 1</button>
+                        <button class="sample-btn" onclick="loadSample(2)">Sample 2</button>
+                        <button class="sample-btn" onclick="loadSample(3)">Sample 3</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="analyze-btn" onclick="predictText()" class="analyze-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Analyze News Authenticity
+            </button>
+
+            <div id="loading" class="loading-state hidden">
+                <div class="loader-ring"></div>
+                <div class="loading-text">
+                    <span>Running inference pipeline</span>
+                    <div class="loading-steps">
+                        <span class="step">① Cleaning text</span>
+                        <span class="step">② Encoding embeddings</span>
+                        <span class="step">③ Classifying...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results" class="results-panel hidden">
+                <div class="results-header">
+                    <h3>Analysis Report</h3>
+                    <div class="results-model-tag">LR + Transformers</div>
+                </div>
+
+                <div class="verdict-row">
+                    <div class="verdict-left">
+                        <div class="verdict-label">Verdict</div>
+                        <div id="label-out" class="verdict-badge">—</div>
+                    </div>
+                    <div class="verdict-icon-wrap" id="verdict-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                </div>
+
+                <div class="confidence-section">
+                    <div class="conf-title">Confidence Matrix</div>
+
+                    <div class="conf-bar-item">
+                        <div class="conf-bar-row">
+                            <div class="conf-label-group">
+                                <div class="conf-dot dot-legit"></div>
+                                <span>Legitimate</span>
+                            </div>
+                            <span id="legit-val" class="conf-pct">0%</span>
+                        </div>
+                        <div class="conf-track">
+                            <div id="legit-fill" class="conf-fill fill-legit"></div>
+                        </div>
+                    </div>
+
+                    <div class="conf-bar-item">
+                        <div class="conf-bar-row">
+                            <div class="conf-label-group">
+                                <div class="conf-dot dot-synth"></div>
+                                <span>Synthetic</span>
+                            </div>
+                            <span id="synth-val" class="conf-pct">0%</span>
+                        </div>
+                        <div class="conf-track">
+                            <div id="synth-fill" class="conf-fill fill-synth"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-meta">
+                    <div class="meta-item">
+                        <span class="meta-key">Input</span>
+                        <span class="meta-val" id="meta-input">—</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-key">Cleaned</span>
+                        <span class="meta-val" id="meta-cleaned">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="error-box" class="error-panel hidden"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Models Catalogue Section -->
+<section id="models" class="section section-alt">
+    <div class="section-container">
+        <div class="section-header">
+            <div class="section-tag">Research Catalogue</div>
+            <h2 class="section-title">All 14 Models Explained</h2>
+            <p class="section-desc">Every model in the research pipeline, with detailed architecture descriptions, feature engineering approaches, and evaluation metrics.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="model-filters">
+            <button class="filter-btn active" data-filter="all" onclick="filterModels('all')">All Models (14)</button>
+            <button class="filter-btn" data-filter="classical" onclick="filterModels('classical')">Classical ML (6)</button>
+            <button class="filter-btn" data-filter="deep" onclick="filterModels('deep')">Deep Learning (4)</button>
+            <button class="filter-btn" data-filter="transformer" onclick="filterModels('transformer')">Transformers (4)</button>
+        </div>
+
+        <div class="models-grid" id="models-grid">
+
+            <!-- 1. LR + TF-IDF Binary -->
+            <div class="model-card" data-category="classical" data-model-id="1">
+                <div class="model-card-top">
+                    <div class="model-number">01</div>
+                    <div class="model-category-tag tag-classical">Classical ML</div>
+                </div>
+                <h3 class="model-name">Logistic Regression <span class="model-variant">TF-IDF Binary</span></h3>
+                <p class="model-desc">Binary classification using Logistic Regression trained on TF-IDF sparse vectors derived from Hindi text tokens. Labels are merged into Pure (Legitimate) vs Septic (Synthetic). Uses <code>distiluse-base-multilingual-cased</code> embeddings for feature extraction.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">SentenceTransformer</span>
+                    <span class="tech-tag">LabelEncoder</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Embedding</div>
+                        <div class="detail-val">distiluse-base-multilingual-cased</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Classifier</div>
+                        <div class="detail-val">LogisticRegression (max_iter=1000)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Split</div>
+                        <div class="detail-val">80% train / 20% test, stratified</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Labels</div>
+                        <div class="detail-val">Pure (Legitimate) · Septic (Synthetic)</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · Confusion Matrix (PNG)</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    logistic_regression_binary.py
+                </div>
+            </div>
+
+            <!-- 2. LR + Sentence Embeddings -->
+            <div class="model-card" data-category="transformer" data-model-id="2">
+                <div class="model-card-top">
+                    <div class="model-number">02</div>
+                    <div class="model-category-tag tag-transformer">Transformer</div>
+                </div>
+                <h3 class="model-name">Logistic Regression <span class="model-variant">Sentence Embeddings</span></h3>
+                <p class="model-desc">The <strong>production deployed model</strong>. Uses <code>paraphrase-multilingual-MiniLM-L12-v2</code> to generate 384-dim dense embeddings from Hindi text, then trains a <code>LogisticRegressionCV</code> with 5-fold cross-validation for automatic hyperparameter selection.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">sentence-transformers</span>
+                    <span class="tech-tag">Cross-Validation</span>
+                    <span class="tech-tag production-tag">★ Production</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Embedding</div>
+                        <div class="detail-val">paraphrase-multilingual-MiniLM-L12-v2</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Embedding Dim</div>
+                        <div class="detail-val">384 dimensions</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Classifier</div>
+                        <div class="detail-val">LogisticRegressionCV (cv=5, n_jobs=-1)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Text Cleaning</div>
+                        <div class="detail-val">Lowercase + whitespace normalization</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Precision/Recall/F1 · Confusion Matrix Heatmap</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    logistic_regression_embeddings.py
+                </div>
+            </div>
+
+            <!-- 3. ANN -->
+            <div class="model-card" data-category="deep" data-model-id="3">
+                <div class="model-card-top">
+                    <div class="model-number">03</div>
+                    <div class="model-category-tag tag-deep">Deep Learning</div>
+                </div>
+                <h3 class="model-name">Artificial Neural Network <span class="model-variant">TF-IDF Features</span></h3>
+                <p class="model-desc">A fully connected feedforward neural network built with TensorFlow/Keras. Takes TF-IDF vectors (15,000 features, 1–2 n-grams) as input and learns non-linear decision boundaries through two hidden layers with dropout regularization.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Keras</span>
+                    <span class="tech-tag">TF-IDF</span>
+                    <span class="tech-tag">Adam</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Architecture</div>
+                        <div class="detail-val">Dense(256, ReLU) → Dropout(0.4) → Dense(128, ReLU) → Dropout(0.3) → Dense(1, Sigmoid)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Features</div>
+                        <div class="detail-val">TF-IDF (15K features, 1-2 ngrams, sublinear_tf)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Training</div>
+                        <div class="detail-val">10 epochs, batch_size=32, 10% val split</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Loss</div>
+                        <div class="detail-val">Binary Crossentropy, Optimizer: Adam (lr=0.001)</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · Confusion Matrix Heatmap</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    ann_model.py
+                </div>
+            </div>
+
+            <!-- 4. CNN Binary -->
+            <div class="model-card" data-category="deep" data-model-id="4">
+                <div class="model-card-top">
+                    <div class="model-number">04</div>
+                    <div class="model-category-tag tag-deep">Deep Learning</div>
+                </div>
+                <h3 class="model-name">Convolutional Neural Network <span class="model-variant">Text CNN</span></h3>
+                <p class="model-desc">1D CNN for Hindi text classification. Maps token sequences to dense 100-dim embeddings via a trainable <code>Embedding</code> layer, then applies <code>Conv1D</code> filters to detect n-gram-like patterns, followed by global max pooling to extract most prominent features.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Keras Tokenizer</span>
+                    <span class="tech-tag">Conv1D</span>
+                    <span class="tech-tag">GlobalMaxPool</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Architecture</div>
+                        <div class="detail-val">Embedding(10K, 100) → Conv1D(128, 5, ReLU) → GlobalMaxPool → Dropout(0.5) → Dense(64) → Dense(2, Softmax)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Vocab & Padding</div>
+                        <div class="detail-val">Vocab: 10,000 tokens, max_length: 100 tokens</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Training</div>
+                        <div class="detail-val">100 epochs, batch_size=32</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Loss</div>
+                        <div class="detail-val">Categorical Crossentropy (2 classes: Softmax)</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Test Accuracy · Detailed Classification Report</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    cnn_binary.py
+                </div>
+            </div>
+
+            <!-- 5. LSTM -->
+            <div class="model-card" data-category="deep" data-model-id="5">
+                <div class="model-card-top">
+                    <div class="model-number">05</div>
+                    <div class="model-category-tag tag-deep">Deep Learning</div>
+                </div>
+                <h3 class="model-name">Long Short-Term Memory <span class="model-variant">Sequence Model</span></h3>
+                <p class="model-desc">A recurrent sequence model that processes tokenized Hindi text word-by-word, capturing long-range semantic dependencies via LSTM cells. Also plots training/validation accuracy and loss curves for in-depth analysis in the research paper.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">LSTM</span>
+                    <span class="tech-tag">Keras Tokenizer</span>
+                    <span class="tech-tag">Seaborn</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Architecture</div>
+                        <div class="detail-val">Embedding(20K, 128) → LSTM(128) → Dropout(0.3) → Dense(64, ReLU) → Dropout(0.3) → Dense(1, Sigmoid)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Sequence</div>
+                        <div class="detail-val">max_words: 20,000 | max_len: 50 | OOV token supported</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Training</div>
+                        <div class="detail-val">6 epochs, batch_size=32, 10% val split</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Plots</div>
+                        <div class="detail-val">Confusion Matrix + Accuracy/Loss training curves</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · Confusion + Training Curves (PNG)</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    lstm_model.py
+                </div>
+            </div>
+
+            <!-- 6. MuRIL -->
+            <div class="model-card" data-category="transformer" data-model-id="6">
+                <div class="model-card-top">
+                    <div class="model-number">06</div>
+                    <div class="model-category-tag tag-transformer">Transformer</div>
+                </div>
+                <h3 class="model-name">MuRIL <span class="model-variant">Google Multilingual BERT</span></h3>
+                <p class="model-desc">Fine-tunes <strong>Google's MuRIL (Multilingual Representations for Indian Languages)</strong>, a BERT-based model specifically pre-trained on 17 Indian languages including Hindi. Fine-tuned for binary sequence classification using HuggingFace Trainer API.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">HuggingFace</span>
+                    <span class="tech-tag">google/muril-base-cased</span>
+                    <span class="tech-tag">Trainer API</span>
+                    <span class="tech-tag">PyTorch</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Base Model</div>
+                        <div class="detail-val">google/muril-base-cased (BERT architecture)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Tokenization</div>
+                        <div class="detail-val">max_length: 128, padding: max_length, truncation: True</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Fine-tuning</div>
+                        <div class="detail-val">3 epochs, lr=2e-5, batch_size=8, weight_decay=0.01</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Labels</div>
+                        <div class="detail-val">Pure (0) · Septic (1) — 2-class classification head</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Precision/Recall/F1 · Confusion Matrix Heatmap</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    muril_model.py
+                </div>
+            </div>
+
+            <!-- 7. XLM-RoBERTa Cross-Lingual -->
+            <div class="model-card" data-category="transformer" data-model-id="7">
+                <div class="model-card-top">
+                    <div class="model-number">07</div>
+                    <div class="model-category-tag tag-transformer">Transformer</div>
+                </div>
+                <h3 class="model-name">XLM-RoBERTa <span class="model-variant">Cross-Lingual Transfer</span></h3>
+                <p class="model-desc">Fine-tunes <strong>Facebook's XLM-RoBERTa</strong>, a cross-lingual masked language model trained on 100+ languages. Chosen for its superior cross-lingual transferability, allowing knowledge from high-resource languages to assist Hindi classification. Also includes a live inference function.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">HuggingFace</span>
+                    <span class="tech-tag">xlm-roberta-base</span>
+                    <span class="tech-tag">Trainer API</span>
+                    <span class="tech-tag">100+ Languages</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Base Model</div>
+                        <div class="detail-val">xlm-roberta-base (279M parameters)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Tokenization</div>
+                        <div class="detail-val">max_length: 128, padding, truncation</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Fine-tuning</div>
+                        <div class="detail-val">3 epochs, lr=2e-5, batch_size=8, weight_decay=0.01</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Inference</div>
+                        <div class="detail-val">predict_sentence() function for live Hindi input</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · Confusion Matrix (matplotlib)</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    cross_lingual_model.py
+                </div>
+            </div>
+
+            <!-- 8. Ensemble LR + ANN -->
+            <div class="model-card" data-category="deep" data-model-id="8">
+                <div class="model-card-top">
+                    <div class="model-number">08</div>
+                    <div class="model-category-tag tag-deep">Deep Learning</div>
+                </div>
+                <h3 class="model-name">Ensemble LR + ANN <span class="model-variant">Soft-Vote Averaging</span></h3>
+                <p class="model-desc">A hybrid ensemble that averages the probability outputs of a <strong>Logistic Regression</strong> and a <strong>deep ANN</strong>, both trained on TF-IDF features (20K features, 1-3 n-grams). Soft voting combines the complementary strengths of both classifiers for improved robustness.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">Soft Voting</span>
+                    <span class="tech-tag">TF-IDF (20K)</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Base Learners</div>
+                        <div class="detail-val">LogisticRegression + ANN (Dense 256→128→1)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Features</div>
+                        <div class="detail-val">TF-IDF (20K features, ngrams 1-3, sublinear_tf)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Combination</div>
+                        <div class="detail-val">ensemble_probs = (lr_probs + ann_probs) / 2</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Decision</div>
+                        <div class="detail-val">Threshold at 0.5 for final binary prediction</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Ensemble Accuracy · Classification Report · Green-themed Confusion Matrix</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    ensemble_lr_ann.py
+                </div>
+            </div>
+
+            <!-- 9. KNN Binary -->
+            <div class="model-card" data-category="classical" data-model-id="9">
+                <div class="model-card-top">
+                    <div class="model-number">09</div>
+                    <div class="model-category-tag tag-classical">Classical ML</div>
+                </div>
+                <h3 class="model-name">K-Nearest Neighbors <span class="model-variant">TF-IDF Binary</span></h3>
+                <p class="model-desc">Instance-based learner that classifies Hindi news text by majority vote from its 5 nearest neighbors in TF-IDF feature space. Simple non-parametric baseline that reveals how well news authenticity separates in sparse vector space.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">TF-IDF</span>
+                    <span class="tech-tag">KNeighborsClassifier</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Features</div>
+                        <div class="detail-val">TF-IDF vectors (default vocabulary)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Hyperparams</div>
+                        <div class="detail-val">n_neighbors=5, metric: Euclidean (default)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Split</div>
+                        <div class="detail-val">80% train / 20% test, stratified</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Labels</div>
+                        <div class="detail-val">Legitimate (0) · Synthetic (1)</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · Confusion Matrix Heatmap</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    knn_binary.py
+                </div>
+            </div>
+
+            <!-- 10. Naive Bayes Binary -->
+            <div class="model-card" data-category="classical" data-model-id="10">
+                <div class="model-card-top">
+                    <div class="model-number">10</div>
+                    <div class="model-category-tag tag-classical">Classical ML</div>
+                </div>
+                <h3 class="model-name">Naïve Bayes <span class="model-variant">Multinomial TF-IDF</span></h3>
+                <p class="model-desc">A probabilistic generative model based on Bayes' theorem with feature independence assumption. <code>MultinomialNB</code> is well-suited for TF-IDF count-like features. Fastest to train among all classifiers — serves as the fastest baseline for comparison.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">MultinomialNB</span>
+                    <span class="tech-tag">TF-IDF</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Algorithm</div>
+                        <div class="detail-val">Multinomial Naïve Bayes (counts → likelihood)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Features</div>
+                        <div class="detail-val">TF-IDF (default vocabulary, all n-grams)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Split</div>
+                        <div class="detail-val">90% train / 10% test, stratified</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Advantage</div>
+                        <div class="detail-val">Fastest training, interpretable word probabilities</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · Confusion Matrix Heatmap</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    naive_bayes_binary.py
+                </div>
+            </div>
+
+            <!-- 11. SVM Binary -->
+            <div class="model-card" data-category="classical" data-model-id="11">
+                <div class="model-card-top">
+                    <div class="model-number">11</div>
+                    <div class="model-category-tag tag-classical">Classical ML</div>
+                </div>
+                <h3 class="model-name">Support Vector Machine <span class="model-variant">Embedding Features</span></h3>
+                <p class="model-desc">Linear SVM trained on dense multilingual sentence embeddings from <code>distiluse-base-multilingual-cased</code>. SVM maximizes the hyperplane margin to find the optimal binary decision boundary in the embedding space. Labels are mapped to Pure/Septic.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">SentenceTransformer</span>
+                    <span class="tech-tag">SVC (linear kernel)</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Embedding</div>
+                        <div class="detail-val">distiluse-base-multilingual-cased</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">SVM Config</div>
+                        <div class="detail-val">kernel='linear', C=1.0</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Split</div>
+                        <div class="detail-val">80% train / 20% test, stratified</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Labels</div>
+                        <div class="detail-val">Pure (Legitimate) · Septic (Synthetic)</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy · Classification Report · ConfusionMatrixDisplay (PNG)</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    svm_binary.py
+                </div>
+            </div>
+
+            <!-- 12. XGBoost Binary -->
+            <div class="model-card" data-category="classical" data-model-id="12">
+                <div class="model-card-top">
+                    <div class="model-number">12</div>
+                    <div class="model-category-tag tag-classical">Classical ML</div>
+                </div>
+                <h3 class="model-name">XGBoost <span class="model-variant">Gradient Boosted Trees</span></h3>
+                <p class="model-desc">Extreme Gradient Boosting classifier trained on <code>distiluse-base-multilingual-cased-v2</code> embeddings. XGBoost uses an ensemble of decision trees that are sequentially trained to correct prior mistakes through gradient descent on a differentiable loss function.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">XGBoost</span>
+                    <span class="tech-tag">SentenceTransformer v2</span>
+                    <span class="tech-tag">Boosted Trees</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Embedding</div>
+                        <div class="detail-val">distiluse-base-multilingual-cased-v2</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">XGBoost Config</div>
+                        <div class="detail-val">eval_metric='logloss', use_label_encoder=False</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Preprocessing</div>
+                        <div class="detail-val">Filters rare classes, stratified 80/20 split</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Labels</div>
+                        <div class="detail-val">Legitimate (0) · Synthetic (1)</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Test Accuracy · Classification Report · Confusion Matrix Heatmap</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    xgboost_binary.py
+                </div>
+            </div>
+
+            <!-- 13. Voting Ensemble -->
+            <div class="model-card" data-category="classical" data-model-id="13">
+                <div class="model-card-top">
+                    <div class="model-number">13</div>
+                    <div class="model-category-tag tag-classical">Classical ML</div>
+                </div>
+                <h3 class="model-name">Voting Ensemble <span class="model-variant">6-Model Hard Vote</span></h3>
+                <p class="model-desc">A meta-ensemble using <strong>majority (hard) voting</strong> from 6 diverse TF-IDF classifiers: LinearSVC, MultinomialNB, KNN (k=5), RandomForest (200 trees), DecisionTree, and Logistic Regression. Features are TF-IDF with 5,000 features and 1-2 n-grams.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">VotingClassifier</span>
+                    <span class="tech-tag">LinearSVC</span>
+                    <span class="tech-tag">RandomForest</span>
+                    <span class="tech-tag">6 Learners</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Learners</div>
+                        <div class="detail-val">LinearSVC · MultinomialNB · KNN(5) · RandomForest(200) · DecisionTree · LogisticRegression</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Features</div>
+                        <div class="detail-val">TF-IDF (5K features, 1-2 ngrams)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Voting</div>
+                        <div class="detail-val">Hard voting (majority class wins)</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Goal</div>
+                        <div class="detail-val">Higher robustness by aggregating diverse classifiers</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Accuracy % · Classification Report · Confusion Matrix (text)</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    voting_ensemble.py
+                </div>
+            </div>
+
+            <!-- 14. Mentor Balanced -->
+            <div class="model-card model-card-featured" data-category="transformer" data-model-id="14">
+                <div class="model-card-top">
+                    <div class="model-number">14</div>
+                    <div class="model-category-tag tag-transformer">Transformer</div>
+                </div>
+                <h3 class="model-name">Mentor Balanced <span class="model-variant">Full Research Pipeline</span></h3>
+                <p class="model-desc">The most comprehensive model script in the entire repository (36 KB). A full-scale research pipeline including data balancing, custom tokenization, transformer fine-tuning, evaluation across metrics, and publication-ready plot generation. This is the primary experiment design from the research paper.</p>
+                <div class="model-tech-stack">
+                    <span class="tech-tag">Full Pipeline</span>
+                    <span class="tech-tag">Class Balancing</span>
+                    <span class="tech-tag">HuggingFace</span>
+                    <span class="tech-tag">Research Grade</span>
+                    <span class="tech-tag production-tag">★ Primary Experiment</span>
+                </div>
+                <div class="model-details-grid">
+                    <div class="model-detail">
+                        <div class="detail-key">Script Size</div>
+                        <div class="detail-val">36 KB — most comprehensive model in repo</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Purpose</div>
+                        <div class="detail-val">Full end-to-end research experiment pipeline</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Features</div>
+                        <div class="detail-val">Data balancing, custom preprocessing, full eval suite</div>
+                    </div>
+                    <div class="model-detail">
+                        <div class="detail-key">Outputs</div>
+                        <div class="detail-val">All metrics + publication-ready charts</div>
+                    </div>
+                </div>
+                <div class="model-output-section">
+                    <div class="output-label">Output Format</div>
+                    <div class="output-meta">Full Research Metrics Suite · Publication-Ready Visualizations</div>
+                </div>
+                <div class="model-file">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    mentor_balanced.py
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Comparison Table -->
+<section id="comparison" class="section">
+    <div class="section-container">
+        <div class="section-header">
+            <div class="section-tag">Performance</div>
+            <h2 class="section-title">Model Comparison Table</h2>
+            <p class="section-desc">Side-by-side comparison of all 14 models across architecture, features, training complexity, and expected performance tier.</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Model Name</th>
+                        <th>Category</th>
+                        <th>Features / Embedding</th>
+                        <th>Framework</th>
+                        <th>Complexity</th>
+                        <th>Perf. Tier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td-num">01</td>
+                        <td class="td-name">Logistic Regression (Binary)</td>
+                        <td><span class="tbl-tag classical">Classical</span></td>
+                        <td>distiluse-base-multilingual-cased</td>
+                        <td>scikit-learn</td>
+                        <td><span class="complexity low">Low</span></td>
+                        <td><span class="perf-tier tier-b">B+</span></td>
+                    </tr>
+                    <tr class="tr-highlighted">
+                        <td class="td-num">02</td>
+                        <td class="td-name">LR + Sentence Embeddings <span class="prod-mark">⭐ Production</span></td>
+                        <td><span class="tbl-tag transformer">Transformer</span></td>
+                        <td>paraphrase-multilingual-MiniLM-L12-v2</td>
+                        <td>scikit-learn + ST</td>
+                        <td><span class="complexity low">Low</span></td>
+                        <td><span class="perf-tier tier-a">A</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">03</td>
+                        <td class="td-name">ANN (TF-IDF)</td>
+                        <td><span class="tbl-tag deep">Deep</span></td>
+                        <td>TF-IDF (15K, 1-2 ngrams)</td>
+                        <td>TensorFlow/Keras</td>
+                        <td><span class="complexity medium">Medium</span></td>
+                        <td><span class="perf-tier tier-b">B+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">04</td>
+                        <td class="td-name">CNN (Text 1D)</td>
+                        <td><span class="tbl-tag deep">Deep</span></td>
+                        <td>Trainable Embedding (10K vocab)</td>
+                        <td>TensorFlow/Keras</td>
+                        <td><span class="complexity medium">Medium</span></td>
+                        <td><span class="perf-tier tier-b">B</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">05</td>
+                        <td class="td-name">LSTM (Sequence)</td>
+                        <td><span class="tbl-tag deep">Deep</span></td>
+                        <td>Trainable Embedding (20K vocab)</td>
+                        <td>TensorFlow/Keras</td>
+                        <td><span class="complexity medium">Medium</span></td>
+                        <td><span class="perf-tier tier-b">B+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">06</td>
+                        <td class="td-name">MuRIL (Google BERT)</td>
+                        <td><span class="tbl-tag transformer">Transformer</span></td>
+                        <td>google/muril-base-cased (128 max len)</td>
+                        <td>HuggingFace Transformers</td>
+                        <td><span class="complexity high">High</span></td>
+                        <td><span class="perf-tier tier-a">A+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">07</td>
+                        <td class="td-name">XLM-RoBERTa (Cross-lingual)</td>
+                        <td><span class="tbl-tag transformer">Transformer</span></td>
+                        <td>xlm-roberta-base (279M params)</td>
+                        <td>HuggingFace Transformers</td>
+                        <td><span class="complexity high">High</span></td>
+                        <td><span class="perf-tier tier-a">A+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">08</td>
+                        <td class="td-name">Ensemble LR + ANN</td>
+                        <td><span class="tbl-tag deep">Deep</span></td>
+                        <td>TF-IDF (20K, 1-3 ngrams)</td>
+                        <td>TF + scikit-learn</td>
+                        <td><span class="complexity medium">Medium</span></td>
+                        <td><span class="perf-tier tier-a">A</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">09</td>
+                        <td class="td-name">K-Nearest Neighbors</td>
+                        <td><span class="tbl-tag classical">Classical</span></td>
+                        <td>TF-IDF (default vocab)</td>
+                        <td>scikit-learn</td>
+                        <td><span class="complexity low">Low</span></td>
+                        <td><span class="perf-tier tier-c">C+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">10</td>
+                        <td class="td-name">Naïve Bayes</td>
+                        <td><span class="tbl-tag classical">Classical</span></td>
+                        <td>TF-IDF (default vocab)</td>
+                        <td>scikit-learn</td>
+                        <td><span class="complexity low">Low</span></td>
+                        <td><span class="perf-tier tier-c">C+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">11</td>
+                        <td class="td-name">SVM (Linear Kernel)</td>
+                        <td><span class="tbl-tag classical">Classical</span></td>
+                        <td>distiluse-base-multilingual-cased</td>
+                        <td>scikit-learn</td>
+                        <td><span class="complexity low">Low</span></td>
+                        <td><span class="perf-tier tier-b">B+</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">12</td>
+                        <td class="td-name">XGBoost</td>
+                        <td><span class="tbl-tag classical">Classical</span></td>
+                        <td>distiluse-base-multilingual-cased-v2</td>
+                        <td>XGBoost + scikit-learn</td>
+                        <td><span class="complexity medium">Medium</span></td>
+                        <td><span class="perf-tier tier-b">A−</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">13</td>
+                        <td class="td-name">Voting Ensemble (6-model)</td>
+                        <td><span class="tbl-tag classical">Classical</span></td>
+                        <td>TF-IDF (5K, 1-2 ngrams)</td>
+                        <td>scikit-learn</td>
+                        <td><span class="complexity medium">Medium</span></td>
+                        <td><span class="perf-tier tier-b">B+</span></td>
+                    </tr>
+                    <tr class="tr-featured">
+                        <td class="td-num">14</td>
+                        <td class="td-name">Mentor Balanced <span class="prod-mark">⭐ Primary</span></td>
+                        <td><span class="tbl-tag transformer">Transformer</span></td>
+                        <td>Full pipeline (balanced dataset)</td>
+                        <td>HuggingFace + custom</td>
+                        <td><span class="complexity high">High</span></td>
+                        <td><span class="perf-tier tier-a">A+</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Architecture Diagram Section -->
+<section id="architecture" class="section section-alt">
+    <div class="section-container">
+        <div class="section-header">
+            <div class="section-tag">System Design</div>
+            <h2 class="section-title">Deployed Architecture</h2>
+            <p class="section-desc">The production inference pipeline that powers this live application.</p>
+        </div>
+
+        <div class="arch-diagram">
+            <div class="arch-flow">
+                <div class="arch-node input-node">
+                    <div class="arch-icon">📝</div>
+                    <div class="arch-node-title">Input</div>
+                    <div class="arch-node-sub">Hindi news text</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <div class="arch-icon">🧹</div>
+                    <div class="arch-node-title">Preprocessing</div>
+                    <div class="arch-node-sub">Lowercase + whitespace normalization</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node highlight-node">
+                    <div class="arch-icon">🔤</div>
+                    <div class="arch-node-title">Embedding</div>
+                    <div class="arch-node-sub">paraphrase-multilingual-MiniLM-L12-v2<br>384-dim dense vector</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node highlight-node">
+                    <div class="arch-icon">🧠</div>
+                    <div class="arch-node-title">LogisticRegressionCV</div>
+                    <div class="arch-node-sub">5-fold CV, n_jobs=-1<br>Loaded from lr_model.pkl</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node output-node">
+                    <div class="arch-icon">✅</div>
+                    <div class="arch-node-title">Output</div>
+                    <div class="arch-node-sub">Label + confidence matrix (JSON)</div>
+                </div>
+            </div>
+
+            <div class="arch-stack">
+                <div class="stack-item">
+                    <div class="stack-layer" style="background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4)">
+                        <span class="stack-label">🌐 Frontend</span>
+                        <span>HTML + Vanilla CSS + JS</span>
+                    </div>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-layer" style="background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3)">
+                        <span class="stack-label">⚡ API</span>
+                        <span>FastAPI (Python 3.10) — POST /predict</span>
+                    </div>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-layer" style="background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3)">
+                        <span class="stack-label">🤖 Model</span>
+                        <span>SentenceTransformer + Joblib (lr_model.pkl)</span>
+                    </div>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-layer" style="background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3)">
+                        <span class="stack-label">🐳 Container</span>
+                        <span>Docker → Hugging Face Spaces (port 7860)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="nav-logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>NewsBias<span class="brand-accent">AI</span></span>
+        </div>
+        <div class="footer-meta">
+            <p>Hindi News Authentication Research · 14 ML Models · Language: हिंदी</p>
+            <p class="footer-sub">Powered by SentenceTransformer + LogisticRegressionCV · FastAPI + Docker</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
