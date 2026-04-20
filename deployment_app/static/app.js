@@ -71,7 +71,14 @@ async function predictText() {
             body: JSON.stringify({ text: inputText })
         });
 
-        const data = await response.json();
+        // Safely parse — server might return plain text on crash
+        let data;
+        const rawText = await response.text();
+        try {
+            data = JSON.parse(rawText);
+        } catch {
+            throw new Error(`Server error (${response.status}): ${rawText.substring(0, 120)}`);
+        }
 
         if (!response.ok) {
             throw new Error(data.detail || `Server returned ${response.status}`);
